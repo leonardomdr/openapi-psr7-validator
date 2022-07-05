@@ -26,6 +26,7 @@ use League\OpenAPIValidation\Schema\Keywords\Nullable;
 use League\OpenAPIValidation\Schema\Keywords\OneOf;
 use League\OpenAPIValidation\Schema\Keywords\Pattern;
 use League\OpenAPIValidation\Schema\Keywords\Properties;
+use League\OpenAPIValidation\Schema\Keywords\StrictObject;
 use League\OpenAPIValidation\Schema\Keywords\Required;
 use League\OpenAPIValidation\Schema\Keywords\Type;
 use League\OpenAPIValidation\Schema\Keywords\UniqueItems;
@@ -139,6 +140,11 @@ final class SchemaValidator implements Validator
                         $data,
                         $schema->properties,
                         $additionalProperties
+                    );
+
+                    (new StrictObject($schema, $this->validationStrategy, $breadCrumb))->validate(
+                        $data,
+                        $schema->properties
                     );
                 }
             }
